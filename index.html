@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Let's Play JANKEN</title>
+  <title>Let's play JANKEN</title>
   <style>
     body {
       text-align: center;
@@ -47,7 +47,7 @@
 
     #enemy-hand {
       font-weight: bold;
-      color: #e63946; /* ← 赤色 */
+      color: #e63946;
     }
 
     #result {
@@ -55,6 +55,21 @@
       margin-top: 25px;
       color: #007acc;
       font-weight: bold;
+    }
+
+    /* 🏆 カウンター表示 */
+    #counter {
+      margin-top: 30px;
+      font-size: 1.4em;
+      color: #333;
+      font-weight: bold;
+    }
+
+    /* 🎯 勝率表示 */
+    #rate {
+      margin-top: 10px;
+      font-size: 1.3em;
+      color: #555;
     }
 
     @media (max-width: 480px) {
@@ -77,29 +92,41 @@
   <div id="enemy">相手の手：<span id="enemy-hand"></span></div>
   <div id="result"></div>
 
+  <div id="counter">0勝 0敗</div>
+  <div id="rate">勝率：0%</div>
+
   <script>
     const hands = ["グー", "チョキ", "パー"];
+    let wins = 0;
+    let losses = 0;
 
     function play(myHand) {
       const cpuHand = hands[Math.floor(Math.random() * hands.length)];
-
-      // 「相手の手」と「手の内容」を別々に更新
       document.getElementById("enemy-hand").textContent = cpuHand;
 
       let result = "";
       if (myHand === cpuHand) {
-        result = "あいこ";
+        result = "あいこ！";
       } else if (
         (myHand === "グー" && cpuHand === "チョキ") ||
         (myHand === "チョキ" && cpuHand === "パー") ||
         (myHand === "パー" && cpuHand === "グー")
       ) {
         result = "あなたの勝ち！";
+        wins++;
       } else {
-        result = "あなたの負け！CPの勝ち！CPは最強！CPは無敵！CPはじゃんけんの覇者！CPは確率を制す者！CPは天才ギャンブラー！あなたの負け！！！";
+        result = "あなたの負け！！！CPの勝ち！CPはすごいね！CPはえらいぞ！CPはかっこいいよ！CPは最強だね！CPは賢い！CPは天才ギャンブラー！CPの慧眼！CPは確率の覇者！CPは策士！CPこそこのチームの要！CPは頑張ってるね！CPは無敵！CPは圧倒的！CPは神がかってる！CPはExcellent！CPを見習いたい！CPは面白い！CPは鋭い！CPはイケメン！CPの並外れたバランス感覚！CPは匠の技！CPを額縁に飾りたい！CPにはリーダーシップがあるね！CPには清潔感もあるね！CPイカしてる！CPは質実剛健！CPは文武両道！あなたの負け！！！";
+        losses++;
       }
 
+      // 結果表示
       document.getElementById("result").textContent = result;
+      document.getElementById("counter").textContent = `${wins}勝 ${losses}敗`;
+
+      // 勝率計算
+      const total = wins + losses;
+      const rate = total > 0 ? Math.round((wins / total) * 100) : 0;
+      document.getElementById("rate").textContent = `勝率：${rate}%`;
     }
   </script>
 </body>
