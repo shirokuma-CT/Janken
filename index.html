@@ -2,28 +2,34 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- ←これがスマホ最適化の肝！ -->
   <title>Let's play JANKEN</title>
   <style>
     body {
       text-align: center;
       font-family: "sans-serif";
-      margin-top: 100px;
+      margin: 0;
+      padding: 40px 10px;
       background-color: #fdfdfd;
     }
 
     h1 {
       color: #333;
+      font-size: 1.8em;
+      margin-bottom: 30px;
+      font-weight: bold;
     }
 
     button {
-      font-size: 20px;
-      padding: 10px 20px;
-      margin: 10px;
-      border-radius: 12px;
+      font-size: 1.4em; /* スマホで見やすい大きさ */
+      padding: 15px 30px;
+      margin: 12px;
+      border-radius: 14px;
       border: 2px solid #888;
       background-color: #f0f0f0;
       transition: all 0.1s ease;
       cursor: pointer;
+      width: 120px; /* 同じ幅で整える */
     }
 
     /* ✨ 押した瞬間に縮んで色が変わる！ */
@@ -34,16 +40,25 @@
     }
 
     #enemy {
-      font-size: 24px;
+      font-size: 1.4em;
       color: #444;
-      margin-top: 30px;
+      margin-top: 35px;
     }
 
     #result {
-      font-size: 28px;
-      margin-top: 20px;
+      font-size: 1.6em;
+      margin-top: 25px;
       color: #007acc;
       font-weight: bold;
+    }
+
+    /* 📱 スマホでは中央寄せでボタンを縦並びに */
+    @media (max-width: 480px) {
+      button {
+        display: block;
+        width: 80%;
+        margin: 12px auto;
+      }
     }
   </style>
 </head>
@@ -67,7 +82,7 @@
 
       let result = "";
       if (myHand === cpuHand) {
-        result = "あいこ";
+        result = "あいこ！";
       } else if (
         (myHand === "グー" && cpuHand === "チョキ") ||
         (myHand === "チョキ" && cpuHand === "パー") ||
