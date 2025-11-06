@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Let's play JANKEN</title>
+  <title>Let's Play JANKEN</title>
   <style>
     body {
       text-align: center;
@@ -29,11 +29,10 @@
       background-color: #f0f0f0;
       transition: all 0.1s ease;
       cursor: pointer;
-      min-width: 120px;          /* ← 改行防止・横幅を確保 */
-      white-space: nowrap;       /* ← 文字の改行を禁止 */
+      min-width: 120px;
+      white-space: nowrap;
     }
 
-    /* ✨ 押した瞬間に縮んで色が変わる！ */
     button:active {
       transform: scale(0.9);
       background-color: #ffe066;
@@ -46,6 +45,11 @@
       margin-top: 35px;
     }
 
+    #enemy-hand {
+      font-weight: bold;
+      color: #e63946; /* ← 赤色 */
+    }
+
     #result {
       font-size: 1.6em;
       margin-top: 25px;
@@ -53,7 +57,6 @@
       font-weight: bold;
     }
 
-    /* 📱 スマホでは縦並び・押しやすく */
     @media (max-width: 480px) {
       button {
         display: block;
@@ -71,7 +74,7 @@
     <button onclick="play('パー')">パー</button>
   </div>
 
-  <div id="enemy"></div>
+  <div id="enemy">相手の手：<span id="enemy-hand"></span></div>
   <div id="result"></div>
 
   <script>
@@ -79,11 +82,13 @@
 
     function play(myHand) {
       const cpuHand = hands[Math.floor(Math.random() * hands.length)];
-      document.getElementById("enemy").textContent = "相手の手：" + cpuHand;
+
+      // 「相手の手」と「手の内容」を別々に更新
+      document.getElementById("enemy-hand").textContent = cpuHand;
 
       let result = "";
       if (myHand === cpuHand) {
-        result = "あいこ！";
+        result = "あいこ";
       } else if (
         (myHand === "グー" && cpuHand === "チョキ") ||
         (myHand === "チョキ" && cpuHand === "パー") ||
