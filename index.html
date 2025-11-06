@@ -4,19 +4,57 @@
   <meta charset="UTF-8">
   <title>Let's play JANKEN</title>
   <style>
-    body { text-align:center; font-family: "sans-serif"; margin-top: 100px; }
-    button { font-size: 20px; padding: 10px 20px; margin: 10px; border-radius: 12px; }
-    #result { font-size: 28px; margin-top: 40px; color: #007acc; }
-    #enemy { font-size: 24px; color: #444; }
+    body {
+      text-align: center;
+      font-family: "sans-serif";
+      margin-top: 100px;
+      background-color: #fdfdfd;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    button {
+      font-size: 20px;
+      padding: 10px 20px;
+      margin: 10px;
+      border-radius: 12px;
+      border: 2px solid #888;
+      background-color: #f0f0f0;
+      transition: all 0.1s ease;
+      cursor: pointer;
+    }
+
+    /* ✨ 押した瞬間に縮んで色が変わる！ */
+    button:active {
+      transform: scale(0.9);
+      background-color: #ffe066;
+      border-color: #ffb347;
+    }
+
+    #enemy {
+      font-size: 24px;
+      color: #444;
+      margin-top: 30px;
+    }
+
+    #result {
+      font-size: 28px;
+      margin-top: 20px;
+      color: #007acc;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
-  <h1> じゃん！！！けん！！！ </h1>
+  <h1>じゃん！！！けん！！！</h1>
   <div>
     <button onclick="play('グー')">グー</button>
     <button onclick="play('チョキ')">チョキ</button>
     <button onclick="play('パー')">パー</button>
   </div>
+
   <div id="enemy"></div>
   <div id="result"></div>
 
@@ -29,7 +67,7 @@
 
       let result = "";
       if (myHand === cpuHand) {
-        result = "あいこ！";
+        result = "あいこ";
       } else if (
         (myHand === "グー" && cpuHand === "チョキ") ||
         (myHand === "チョキ" && cpuHand === "パー") ||
@@ -44,6 +82,3 @@
   </script>
 </body>
 </html>
-
-
-
