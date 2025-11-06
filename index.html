@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- ←これがスマホ最適化の肝！ -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Let's play JANKEN</title>
   <style>
     body {
@@ -21,7 +21,7 @@
     }
 
     button {
-      font-size: 1.4em; /* スマホで見やすい大きさ */
+      font-size: 1.4em;
       padding: 15px 30px;
       margin: 12px;
       border-radius: 14px;
@@ -29,7 +29,8 @@
       background-color: #f0f0f0;
       transition: all 0.1s ease;
       cursor: pointer;
-      width: 120px; /* 同じ幅で整える */
+      min-width: 120px;          /* ← 改行防止・横幅を確保 */
+      white-space: nowrap;       /* ← 文字の改行を禁止 */
     }
 
     /* ✨ 押した瞬間に縮んで色が変わる！ */
@@ -52,7 +53,7 @@
       font-weight: bold;
     }
 
-    /* 📱 スマホでは中央寄せでボタンを縦並びに */
+    /* 📱 スマホでは縦並び・押しやすく */
     @media (max-width: 480px) {
       button {
         display: block;
@@ -90,8 +91,9 @@
       ) {
         result = "あなたの勝ち！";
       } else {
-        result = "CPの勝ち！CPは最強！CPは無敵！CPはじゃんけんの覇者！CPは確率を制す者！CPは天才ギャンブラー！あなたの負け！！！";
+        result = "あなたの負け！CPの勝ち！CPは最強！CPは無敵！CPはじゃんけんの覇者！CPは確率を制す者！CPは天才ギャンブラー！あなたの負け！！！";
       }
+
       document.getElementById("result").textContent = result;
     }
   </script>
